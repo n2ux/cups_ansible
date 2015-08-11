@@ -4,7 +4,12 @@
     - cups
     - gutenprint-cups
     - hpijs
+    - foomatic
     - foomatic-db-ppds
+  tags: cups
+
+- name: Fix foomatic Install Bug
+  action: file path=/usr/lib64/cups state=link src=/usr/lib/cups
   tags: cups
 
 - name: Configure printers
