@@ -1,0 +1,13 @@
+- name: Install Cups Packages
+  action: yum state=present pkg=${item}
+  with_items:
+    - cups
+    - gutenprint-cups
+    - hpijs
+    - foomatic-db-ppds
+  tags: cups
+
+- name: Configure printers
+  action: command /usr/sbin/lpadmin -p {{ item['name'] }} -v {{ item['uri'] }} -m {{ item['ppd'] }} -E
+  with_items: "{{ printers }}"
+  tags: cups
